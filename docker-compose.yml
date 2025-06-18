@@ -64,7 +64,6 @@ services:
       - ./nginx/certs:/etc/letsencrypt
       - ./nginx/conf.d:/etc/nginx/conf.d
       - media_data:/var/www/media
-    entrypoint: "sh -c \"trap exit TERM; while :; do sleep 6h & wait \$\$$!; nginx -s reload; done\" || true"
 
 volumes:
   postgres_data:
