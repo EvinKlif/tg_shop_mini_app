@@ -53,7 +53,7 @@ function App() {
   const handleSubmitOrder = async () => {
 
 
-  const { telegram_id } = { telegram_id: 898836844 };
+  const { telegram_id } = userData;
   // Формируем массив заказов по каждому товару
   const orders = products
     .filter(p => cart[p.id])
