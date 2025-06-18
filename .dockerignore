@@ -1,0 +1,33 @@
+# === Общие файлы ===
+.git/
+.gitignore
+.dockerignore
+.DS_Store
+*.md
+*.txt
+LICENSE
+
+# === React ===
+node_modules/
+**/node_modules/
+build/
+.next/
+out/
+
+# === FastAPI ===
+__pycache__/
+venv/
+env/
+*.pyc
+*.pyo
+*.sqlite3
+
+# === Логи и временные файлы ===
+*.log
+*.tmp
+*.cache
+
+# === Конфиги окружения ===
+.env
+.env.local
+*.env.dev

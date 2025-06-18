@@ -1,0 +1,50 @@
+# === Общие файлы ===
+.DS_Store
+*.log
+*.swp
+*.bak
+*.tmp
+.idea/
+.vscode/
+.env
+.env.local
+*.env
+
+# === React (Frontend) ===
+node_modules/
+dist/
+build/
+.next/
+out/
+.cache/
+.eslintcache
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# === FastAPI (Python Backend) ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+venv/
+env/
+*.egg-info/
+*.sqlite3
+
+# === PostgreSQL ===
+*.dump
+*.pgdump
+/data/  # Если используете локальные данные БД
+
+# === Nginx ===
+*.conf.local
+logs/
+*.access.log
+*.error.log
+
+# === Docker ===
+docker-compose.override.yml

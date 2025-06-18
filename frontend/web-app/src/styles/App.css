@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Определение CSS-переменной для анимации */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.app {
+  padding: 40px 20px;
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === Заголовок магазина === */
+.shop-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding: 20px 40px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.shop-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.shop-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  transform: translateX(-50%);
+}
+
+/* === Сетка товаров (2 в ряд) === */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* === Карточка товара с анимированной радужной рамкой === */
+.product-card {
+  position: relative;
+  background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Анимированная радужная рамка */
+.product-card::after,
+.product-card::before {
+  content: '';
+  position: absolute;
+  height: calc(100% + 6px);
+  width: calc(100% + 6px);
+  background-image: conic-gradient(from var(--angle), #ff0000,  #1505f3);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  border-radius: 15px;
+  animation: 6s spin linear infinite;
+  
+  /* Создаем эффект рамки с помощью маски */
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  
+  /* Устанавливаем толщину рамки */
+  padding: 3px;
+}
+
+.product-card::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Фото товара */
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Название товара — очень тонкий шрифт */
+.product-card h2 {
+  font-size: 20px;
+  font-weight: 200;
+  margin: 10px 0 6px;
+  color: #333;
+}
+
+/* Цена или описание — жирный шрифт */
+.product-card p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #c20707;
+  margin: 4px 0;
+}
+
+/* === Блок управления количеством === */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.quantity-btn {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #eee;
+}
+
+.quantity-btn:active {
+  background-color: #ddd;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-display {
+  font-size: 16px;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* === Кнопка "Купить" === */
+.cart-summary {
+  margin-top: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.cart-summary button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary button:hover {
+  background-color: #45a049;
+}
