@@ -1,5 +1,7 @@
 import React from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ProductCard = ({ product, onIncrease, onDecrease }) => {
   const quantity = product.quantity || 0;
 
@@ -7,13 +9,13 @@ const ProductCard = ({ product, onIncrease, onDecrease }) => {
     <div className="product-card">
       {/* Фото */}
       <img
-        src={`$'http://backend:8000'/media/${product.photo_url}`}
+        src={`${API_URL}/media/${product.photo_url}`}
         alt={product.name}
         className="product-image"
       />
 
       {/* Название */}
-      <h6>{product.name}</h6>
+      <h3>{product.name}</h3>
 
       {/* Цена */}
       <p>Цена: {product.price} ₽</p>

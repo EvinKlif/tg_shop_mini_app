@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from App.Core.utils import save_photo
 from App.Schemas.product import ProductCreate, Product as ProductSchema
-from App.Services.product_service import list_products, add_product
+from App.Services.product_service import list_products, add_product, service_delete_product
 from App.DataBase.session import get_session
 
 router = APIRouter(prefix="/products", tags=["Products"])
@@ -23,3 +23,8 @@ async def create_product(name: str = Form(...), price: int = Form(...), photo: U
         "photo_url": photo_url
     }
     return await add_product(db, product_data)
+
+
+@router.delete("/{product_id}", status_code=status.HTTP_200_OK)
+async def delete_product_endpoint(product_id: int, db: AsyncSession = Depends(get_session)):
+    return await service_delete_product(db, product_id)

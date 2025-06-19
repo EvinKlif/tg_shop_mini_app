@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from App.Repositories.product_repository import get_all_products, get_product_by_id, create_product, get_product_by_name
+from App.Repositories.product_repository import get_all_products, get_product_by_id, create_product, \
+    get_product_by_name, delete_product
 
 
 async def list_products(db: AsyncSession):
@@ -23,3 +24,10 @@ async def add_product(db: AsyncSession, product_data: dict):
     if existing:
         raise ValueError("Product with this name already exists")
     return await create_product(db, product_data)
+
+
+async def service_delete_product(db: AsyncSession, product_id: int):
+    deleted_product = await delete_product(db, product_id)
+    if not deleted_product:
+        return None
+    return {"message": "Product deleted successfully", "product_id": product_id}

@@ -26,3 +26,11 @@ async def create_product(db: AsyncSession, product_data: dict):
     await db.commit()
     await db.refresh(db_product)
     return db_product
+
+
+async def delete_product(db: AsyncSession, product_id: int):
+    product = await get_product_by_id(db, product_id)
+    if product:
+        await db.delete(product)
+        await db.commit()
+    return product

@@ -21,10 +21,15 @@ app = FastAPI(title="Shop API", version="1.0.0", docs_url="/setdocs", redoc_url=
 # Настраиваем CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # В продакшене укажите конкретные домены
+    allow_origins=["https://plabot.tw1.ru"],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=[
+        "Content-Type",
+        "Set-Cookie",
+        "Authorization",
+        "X-Requested-With",
+    ],
 )
 
 # Настраиваем путь к media файлам

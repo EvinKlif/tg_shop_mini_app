@@ -20,6 +20,8 @@ services:
       - app-network
     expose:
       - "8000"
+    ports:
+      - "8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -46,8 +48,9 @@ services:
       - "443:443"
     volumes:
       - media_data:/var/www/media
+      - ./nginx/certbot:/var/www/certbot
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/certs:/etc/letsencrypt
+      - certbot_data:/etc/letsencrypt
     container_name: react-nginx
     restart: unless-stopped
     networks:
@@ -61,13 +64,16 @@ services:
     image: certbot/certbot:latest
     container_name: certbot
     volumes:
-      - ./nginx/certs:/etc/letsencrypt
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - media_data:/var/www/media
+      - certbot_data:/etc/letsencrypt
+      - ./nginx/certbot:/var/www/certbot
+    entrypoint: ["sh", "-c", "sleep 10 && certbot certonly --webroot --webroot-path=/var/www/certbot --email @gmail.com --agree-tos --no-eff-email -d url -d url"]
+    restart: on-failure
 
 volumes:
   postgres_data:
   media_data:
+  certbot_data:
+  certbot_www:
 
 networks:
   app-network:

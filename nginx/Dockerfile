@@ -8,7 +8,12 @@ RUN npm run build
 
 FROM nginx:alpine
 COPY --from=builder /app/build /usr/share/nginx/html
-RUN mkdir -p /var/www/certbot && \
-    rm -rf /etc/nginx/conf.d/default.conf  # Удаляем дефолтный конфиг
+
+# Создаем папку для Certbot
+RUN mkdir -p /var/www/certbot
+
+# Удаляем дефолтный конфиг
+RUN rm -rf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]

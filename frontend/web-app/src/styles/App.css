@@ -71,15 +71,16 @@
 /* === Сетка товаров (2 в ряд) === */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr); /* Теперь только один товар в ряду */
   gap: 30px;
   width: 100%;
-  max-width: 640px;
+  max-width: 400px;
 }
 
 /* === Карточка товара с анимированной радужной рамкой === */
 .product-card {
   position: relative;
+  min-height: 400px;
   background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
   border-radius: 12px;
   padding: 20px;
@@ -100,7 +101,7 @@
   translate: -50% -50%;
   z-index: -1;
   border-radius: 15px;
-  animation: 6s spin linear infinite;
+  animation: 25s spin linear infinite;
   
   /* Создаем эффект рамки с помощью маски */
   mask: 
@@ -133,8 +134,8 @@
 /* Фото товара */
 .product-card img {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
+  height: 300px;
+  object-fit: contain;
   border-radius: 8px;
   margin-bottom: 12px;
 }
@@ -149,7 +150,7 @@
 
 /* Цена или описание — жирный шрифт */
 .product-card p {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: #c20707;
   margin: 4px 0;
